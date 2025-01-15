@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { Children, createContext, useState } from "react";
 import auth from "../Firebas/Firebas.init";
 
@@ -18,14 +18,23 @@ const AuthProvider = ({children}) => {
     return createUserWithEmailAndPassword(auth, email, password)
   }
 
-  // const logInUser = (email, password) => {
-  //   setLoading(true)
-  //   return signInWithEmailAndPassword(auth, email, password)
-  // };
 
   const logInUser = (email, password) => {
     setLoading(true)
     return signInWithEmailAndPassword(auth, email, password)
+  }
+
+  const singInOut = () => {
+    setUser(null)
+    return signOut(auth)
+  };
+
+  // const updateUserProfile = (updateData) => {
+  //   return updateProfile (auth.currentUser, updateData)
+  // }
+
+  const updateUserProfile = (updateData) => {
+    return updateProfile(auth.currentUser, updateData)
   }
 
 
@@ -33,7 +42,12 @@ const AuthProvider = ({children}) => {
   
   const studyInfo = {
     createUser,
-    logInUser
+    logInUser,
+    singInOut,
+    user,
+    setUser,
+    loading,
+    updateUserProfile
   }
   return (
     <AuthContext.Provider value={studyInfo}>
