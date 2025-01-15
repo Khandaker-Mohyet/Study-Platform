@@ -2,11 +2,15 @@ import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import lotty from '../../assets/register.json'
 import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import auth from "../../Firebas/Firebas.init";
 
 
 const Register = () => {
   
-  const {createUser} = useAuth()
+  const {createUser, updateUserProfile, setUser, setLoading} = useAuth()
 
   const handelRegister = (e) => {
     e.preventDefault()
@@ -19,13 +23,32 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-      console.log(result)
+        console.log(result)
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser(result.user)
+            toast.success('Successfully Register!')
+          })
+          .catch((error) => {
+            console.log(error)
+            toast.error("Invalid input")
+          })
+        
       })
       .catch((error) => {
       console.log(error)
     })
   }
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+      setLoading(false)
+    })
+    return () => {
+      unsubscribe()
+    }
+  },[])
 
   return (
     <div className="hero bg-base-200 min-h-screen">
