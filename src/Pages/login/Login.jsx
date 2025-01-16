@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import lotty from '../../assets/Login.json'
 import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
 
   const { logInUser } = useAuth()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const from = location.state ||"/"
   
 
   const handelLogIn = (e) => {
@@ -18,11 +22,15 @@ const Login = () => {
 
     logInUser(email, password)
       .then(result => {
-      console.log(result)
+        console.log(result)
+        navigate(from);
+        toast.success('Successfully login!')
       })
       .catch(error =>{
-      console.log(error)
-    })
+        console.log(error)
+        toast.error("email and password don't match")
+      })
+    
   }
 
   return (

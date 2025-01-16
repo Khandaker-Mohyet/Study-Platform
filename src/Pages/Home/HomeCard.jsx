@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { Link } from "react-router-dom";
 import Card from "./Card";
