@@ -23,6 +23,12 @@ const Details = () => {
   const registrationEnd = new Date(registrationEndDate);
   const isRegistrationOpen =
     currentDate >= registrationStart && currentDate <= registrationEnd;
+  
+  const handelAddCard = (Book) => {
+    console.log(Book)
+  }
+  
+  
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white border rounded-lg shadow-md">
       <h1 className="text-2xl font-bold text-gray-800">{sessionTitle}</h1>
@@ -59,7 +65,9 @@ const Details = () => {
 
       <div className="mt-6 flex justify-between items-center">
         {isRegistrationOpen ? (
-          <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+          <button
+            onClick={()=>handelAddCard(AllData)}
+            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
             Book Now
           </button>
         ) : (
