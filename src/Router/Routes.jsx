@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home";
 import Auth from "../Layout/Auth";
 import Login from "../Pages/login/Login";
 import Register from "../Pages/Register/Register";
+import Details from "../Pages/Details/Details";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>
-      }
+      },
+      {
+        path: "/details/:id",
+        element: <Details></Details>,
+        loader: ({params})=> fetch(`http://localhost:5000/studySection/${params.id}`)
+      },
     ]
   },
   {

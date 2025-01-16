@@ -10,13 +10,7 @@ const Banner = () => {
         <h1 className='text-white lg: w-6/12 md:8/12 mx-auto'>
           This project focuses on creating a Collaborative Study Platform that connects students, tutors, and administrators to streamline study session scheduling, resource sharing, and user management.
         </h1>
-        {/* <Link to={'/availableCars'}>
-          <button
-          className="mt-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-3 px-4 rounded shadow hover:shadow-lg transform hover:scale-105 transition-all"
-        >
-          View Available Cars
-        </button>
-        </Link> */}
+        
       </div>
     </div>
   );
