@@ -1,5 +1,5 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { Children, createContext, useState } from "react";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { Children, createContext, useEffect, useState } from "react";
 import auth from "../Firebas/Firebas.init";
 
 
@@ -49,6 +49,18 @@ const AuthProvider = ({children}) => {
     loading,
     updateUserProfile
   }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+      setLoading(false)
+    })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
+  
+  
   return (
     <AuthContext.Provider value={studyInfo}>
       {children}

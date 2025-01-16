@@ -1,7 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
 
 
 const Navbar = () => {
+
+  const {user, singInOut} = useAuth()
 
   const navOption = <>
     <li><NavLink to='/'>Home</NavLink></li>
@@ -41,9 +44,21 @@ const Navbar = () => {
           {navOption}
         </ul>
       </div>
+      
       <div className="navbar-end">
-        <a className="btn">
-          <NavLink to='/auth/login'>LogIn</NavLink></a>
+        {user && user.email ? (
+          <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-[2px] rounded-full mr-3">
+            <img
+              title={`${user.displayName}`}
+              className="w-12 h-12 rounded-full bg-white object-cover"
+              src={user.photoURL}
+              alt="User"
+            />
+          </div>
+        ) : ""}
+        {
+          user && user?.email ? <button onClick={singInOut} className="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-2 px-4 rounded shadow hover:shadow-lg transform hover:scale-105 transition-all">Log out</button> : <Link to="/auth/Login" className="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-2 px-4 rounded shadow hover:shadow-lg transform hover:scale-105 transition-all">Login</Link>
+        }
       </div>
     </div>
   );
