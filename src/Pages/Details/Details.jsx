@@ -1,8 +1,13 @@
 import { useLoaderData } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const Details = () => {
   const AllData = useLoaderData()
+  const { user } = useAuth()
+  const axiosSecure = UseAxiosSecure()
   const {
     sessionTitle,
     tutorName,
@@ -15,20 +20,62 @@ const Details = () => {
     sessionDuration,
     registrationFee,
     status,
+    _id
 
   } = AllData;
 
-    const currentDate = new Date();
+  const currentDate = new Date();
   const registrationStart = new Date(registrationStartDate);
   const registrationEnd = new Date(registrationEndDate);
   const isRegistrationOpen =
     currentDate >= registrationStart && currentDate <= registrationEnd;
-  
+
   const handelAddCard = (Book) => {
-    console.log(Book)
+
+    const bookItem = {
+      bookId: _id,
+      email: user.email,
+      sessionTitle,
+      tutorName
+    }
+    axiosSecure.post('/book', bookItem)
+      .then(res => {
+        console.log(res.data)
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${name} added to your cart`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+
+    // fetch("http://localhost:5000/book", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(bookItem),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.insertedId) {
+    //       Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: "Your booking is confirmed!",
+    //         showConfirmButton: false,
+    //         timer: 1500,
+    //       });
+
+    //     }
+    //   });
+
   }
-  
-  
+
+
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white border rounded-lg shadow-md">
       <h1 className="text-2xl font-bold text-gray-800">{sessionTitle}</h1>
@@ -66,7 +113,7 @@ const Details = () => {
       <div className="mt-6 flex justify-between items-center">
         {isRegistrationOpen ? (
           <button
-            onClick={()=>handelAddCard(AllData)}
+            onClick={() => handelAddCard(AllData)}
             className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
             Book Now
           </button>
@@ -79,13 +126,12 @@ const Details = () => {
           </button>
         )}
         <p
-          className={`text-sm font-medium ${
-            status === "ongoing"
-              ? "text-green-600"
-              : status === "upcoming"
+          className={`text-sm font-medium ${status === "ongoing"
+            ? "text-green-600"
+            : status === "upcoming"
               ? "text-blue-600"
               : "text-red-600"
-          }`}
+            }`}
         >
           Status: {status.charAt(0).toUpperCase() + status.slice(1)}
         </p>

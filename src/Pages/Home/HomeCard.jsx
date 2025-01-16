@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { Link } from "react-router-dom";
 import Card from "./Card";
@@ -10,7 +10,14 @@ const HomeCard = () => {
 
 
   axiosPublic.get('/studySection')
-    .then((res) => setData(res.data))
+  .then((res) => setData(res.data))
+
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/studySection')
+  //     .then(res => res.json())
+  //     .then(result => setData(result))
+    
+  // },[])
 
   
 
