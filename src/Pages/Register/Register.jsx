@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import lotty from '../../assets/register.json'
 import useAuth from "../../Hooks/useAuth";
@@ -8,7 +8,8 @@ import toast from "react-hot-toast";
 
 const Register = () => {
   
-  const {createUser, updateUserProfile, setUser} = useAuth()
+  const { createUser, updateUserProfile, setUser } = useAuth()
+  const navigate = useNavigate()
 
   const handelRegister = (e) => {
     e.preventDefault()
@@ -25,6 +26,7 @@ const Register = () => {
         updateUserProfile({ displayName: name, photoURL: photo })
           .then(() => {
             setUser(result.user)
+            navigate('/');
             toast.success('Successfully Register!')
           })
           .catch((error) => {
