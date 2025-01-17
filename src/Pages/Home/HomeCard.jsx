@@ -9,15 +9,15 @@ const HomeCard = () => {
   const axiosPublic = UseAxiosPublic()
 
 
-  axiosPublic.get('/studySection')
-  .then((res) => setData(res.data))
+  // axiosPublic.get('/studySection')
+  // .then((res) => setData(res.data))
 
-  // useEffect(() => {
-  //   fetch('http://localhost:5000/studySection')
-  //     .then(res => res.json())
-  //     .then(result => setData(result))
+  useEffect(() => {
+    fetch('http://localhost:5000/studySection')
+      .then(res => res.json())
+      .then(result => setData(result))
     
-  // },[])
+  },[])
 
   
 
