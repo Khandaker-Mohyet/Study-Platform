@@ -13,6 +13,9 @@ import Booked from "../Pages/Dashboard/Booked";
 import Note from "../Pages/Dashboard/Note/Note";
 import PersonalNote from "../Pages/Dashboard/PersonalNote/PersonalNote";
 import Materials from "../Pages/Dashboard/Materials/Materials";
+import Users from "../Pages/Dashboard/Admin/Users/Users";
+import StudySession from "../Pages/Dashboard/Admin/StudySession/StudySession";
+import AdminMaterials from "../Pages/Dashboard/Admin/AdminMaterials/AdminMaterials";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +55,20 @@ const router = createBrowserRouter([
       {
         path: 'materials',
         element:<Materials></Materials>
+      },
+
+      // Admin Section
+      {
+        path: 'users',
+        element:<Users></Users>
+      },
+      {
+        path: 'studySession',
+        element:<StudySession></StudySession>
+      },
+      {
+        path: 'adminMaterials',
+        element:<AdminMaterials></AdminMaterials>
       },
     ]
   },
