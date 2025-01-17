@@ -16,6 +16,10 @@ import Materials from "../Pages/Dashboard/Materials/Materials";
 import Users from "../Pages/Dashboard/Admin/Users/Users";
 import StudySession from "../Pages/Dashboard/Admin/StudySession/StudySession";
 import AdminMaterials from "../Pages/Dashboard/Admin/AdminMaterials/AdminMaterials";
+import CreateStudy from "../Pages/Dashboard/Tutor/CreateStudy/CreateStudy";
+import ViewAllStudy from "../Pages/Dashboard/Tutor/ViewAllStudy/ViewAllStudy";
+import UploadMaterials from "../Pages/Dashboard/Tutor/UploadMaterials/UploadMaterials";
+import ViewAllMaterials from "../Pages/Dashboard/Tutor/ViewAllMaterials/ViewAllMaterials";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +73,25 @@ const router = createBrowserRouter([
       {
         path: 'adminMaterials',
         element:<AdminMaterials></AdminMaterials>
+      },
+
+      // Toutor Section
+
+      {
+        path: 'createStudy',
+        element:<CreateStudy></CreateStudy>
+      },
+      {
+        path: 'viewAllStudy',
+        element:<ViewAllStudy></ViewAllStudy>
+      },
+      {
+        path: 'uploadMaterials',
+        element:<UploadMaterials></UploadMaterials>
+      },
+      {
+        path: 'ViewAllMaterials',
+        element:<ViewAllMaterials></ViewAllMaterials>
       },
     ]
   },

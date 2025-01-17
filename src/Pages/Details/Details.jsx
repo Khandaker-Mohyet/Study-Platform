@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const Details = () => {
   const AllData = useLoaderData()
+  console.log(AllData)
   const { user } = useAuth()
   const axiosSecure = UseAxiosSecure()
   const {
