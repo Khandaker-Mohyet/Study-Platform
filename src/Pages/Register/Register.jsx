@@ -3,13 +3,16 @@ import Lottie from "lottie-react";
 import lotty from '../../assets/register.json'
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
+import Google from "../../Components/Google";
 
 
 
 const Register = () => {
-  
+
   const { createUser, updateUserProfile, setUser } = useAuth()
   const navigate = useNavigate()
+  const axiosPublic = UseAxiosPublic()
 
   const handelRegister = (e) => {
     e.preventDefault()
@@ -25,22 +28,33 @@ const Register = () => {
         console.log(result)
         updateUserProfile({ displayName: name, photoURL: photo })
           .then(() => {
-            setUser(result.user)
-            navigate('/');
-            toast.success('Successfully Register!')
+            const userInfo = {
+              displayName: name,
+              photoURL: photo,
+              email: email
+            }
+            axiosPublic.post('/users', userInfo)
+              .then(res => {
+                if (res.data.insertedId) {
+                  setUser(result.user)
+                  navigate('/');
+                  toast.success('Successfully Register!')
+                }
+              })
+
           })
           .catch((error) => {
             console.log(error)
             toast.error("Invalid input")
           })
-        
+
       })
       .catch((error) => {
-      console.log(error)
-    })
+        console.log(error)
+      })
   }
 
-  
+
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -91,7 +105,7 @@ const Register = () => {
               <button className="btn btn-success">Register</button>
             </div>
           </form>
-
+          <Google></Google>
           <p className='text-center mb-3'>Already Have An Account ? <Link className='text-green-600' to="/auth/login">Login</Link></p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import lotty from '../../assets/Login.json'
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import Google from "../../Components/Google";
 
 
 const Login = () => {
@@ -61,7 +62,7 @@ const Login = () => {
           <button className="btn btn-success">Login</button>
         </div>
           </form>
-          
+          <Google></Google>
           <p className='text-center mb-3'>Dont’t Have An Account ? <Link className='text-red-600' to="/auth/register">Register</Link></p>
     </div>
   </div>

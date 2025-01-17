@@ -5,16 +5,39 @@ import useBooked from "../Hooks/useBooked";
 
 
 const Dashboard = () => {
-  
+
   const [booked] = useBooked()
-  console.log(booked)
+  // console.log(booked)
+  const isAdmin = true;
 
   return (
     <div className="flex">
       {/* dashboard side bar */}
       <div className="w-64 min-h-screen bg-orange-400">
         <ul className="menu p-4">
-          
+
+          {
+            isAdmin ?
+              <>
+                <li>
+                  <NavLink to="/dashboard/users">
+                    <FaBook></FaBook>
+                    Users</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/studySession">
+                    <FaUtensils></FaUtensils>
+                    Study Session </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/adminMaterials">
+                <FaList></FaList>
+                Materials
+                    </NavLink>
+                </li>
+                
+              </>
+              :
               <>
                 <li>
                   <NavLink to="/dashboard/booked">
@@ -42,8 +65,9 @@ const Dashboard = () => {
                     <FaUser></FaUser>
                     All Users</NavLink>
                 </li>
-              </> 
-              
+              </>
+          }
+
 
           {/* shared Nav links */}
           <div className="divider"></div>
