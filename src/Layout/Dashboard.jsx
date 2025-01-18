@@ -52,10 +52,29 @@ const Dashboard = () => {
               </>
             )}
             {userData.role === "Tutor" && (
-              <div>
-                <h3>Tutor Dashboard</h3>
-                <p>Manage your classes and student feedback.</p>
-              </div>
+              <>
+                <li>
+                  <NavLink to="/dashboard/createStudy">
+                    <FaBook></FaBook>
+                    Create Study</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/viewAllStudy">
+                    <FaUtensils></FaUtensils>
+                    View All Study</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/uploadMaterials">
+                    <FaList></FaList>
+                    Upload Materials
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/ViewAllMaterials">
+                    <FaBook></FaBook>
+                    View All Materials</NavLink>
+                </li>
+              </>
             )}
             {userData.role === "admin" && (
               <>
