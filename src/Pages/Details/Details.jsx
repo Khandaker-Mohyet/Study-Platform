@@ -134,7 +134,7 @@ const Details = () => {
               : "text-red-600"
             }`}
         >
-          Status: {status.charAt(0).toUpperCase() + status.slice(1)}
+          {/* Status: {status.charAt(0).toUpperCase() + status.slice(1)} */}
         </p>
       </div>
     </div>

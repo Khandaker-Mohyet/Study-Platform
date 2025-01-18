@@ -49,7 +49,7 @@ const ViewAllStudy = () => {
                 </th>
                 
                 <td>
-                  {item.sessionTitle}
+                  {item.title}
                 </td>
                 <td>{item.tutorName}</td>
                 <th>
