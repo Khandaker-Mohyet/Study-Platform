@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const navOption = <>
     <li><NavLink to='/'>Home</NavLink></li>
-    <li><NavLink to='/dashboard/users'>Dashboard</NavLink></li>
+    <li><NavLink to='/dashboard/booked'>Dashboard</NavLink></li>
     <li><NavLink to='/'>Home</NavLink></li>
   </>
 

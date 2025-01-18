@@ -1,14 +1,22 @@
 import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaUser, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useBooked from "../Hooks/useBooked";
+import useRole from "../Hooks/useRole";
 
 
 
 const Dashboard = () => {
 
   const [booked] = useBooked()
-  // console.log(booked)
-  const isAdmin = true;
+  const [userData, userLoading] = useRole()
+
+
+   if (userLoading || !userData) {
+    return <p>Loading...</p>;
+  }
+  
+
+
 
   return (
     <div className="flex">
@@ -16,28 +24,9 @@ const Dashboard = () => {
       <div className="w-64 min-h-screen bg-orange-400">
         <ul className="menu p-4">
 
-          {
-            isAdmin ?
-              <>
-                <li>
-                  <NavLink to="/dashboard/users">
-                    <FaBook></FaBook>
-                    Users</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/studySession">
-                    <FaUtensils></FaUtensils>
-                    Study Session </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/adminMaterials">
-                <FaList></FaList>
-                Materials
-                    </NavLink>
-                </li>
-                
-              </>
-              :
+          <div>
+
+            {userData.role === "Student" && (
               <>
                 <li>
                   <NavLink to="/dashboard/booked">
@@ -51,22 +40,45 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <NavLink to="/dashboard/personalNote">
-                <FaList></FaList>
-                Manage personal notes
-                    </NavLink>
+                    <FaList></FaList>
+                    Manage personal notes
+                  </NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/materials">
                     <FaBook></FaBook>
                     study materials</NavLink>
                 </li>
+              </>
+            )}
+            {userData.role === "Tutor" && (
+              <div>
+                <h3>Tutor Dashboard</h3>
+                <p>Manage your classes and student feedback.</p>
+              </div>
+            )}
+            {userData.role === "admin" && (
+              <>
                 <li>
                   <NavLink to="/dashboard/users">
-                    <FaUser></FaUser>
-                    All Users</NavLink>
+                    <FaBook></FaBook>
+                    Users</NavLink>
                 </li>
+                <li>
+                  <NavLink to="/dashboard/studySession">
+                    <FaUtensils></FaUtensils>
+                    Study Session </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/adminMaterials">
+                    <FaList></FaList>
+                    Materials
+                  </NavLink>
+                </li>
+
               </>
-          }
+            )}
+          </div>
 
 
           {/* shared Nav links */}
