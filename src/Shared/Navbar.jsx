@@ -1,15 +1,34 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import useRole from "../Hooks/useRole";
 
 
 const Navbar = () => {
 
-  const {user, singInOut} = useAuth()
+  const { user, singInOut } = useAuth()
+  const [userData, userLoading] = useRole()
+
+
+  // if (userLoading || !userData) {
+  //   return <p>Loading...</p>;
+  // }
 
   const navOption = <>
     <li><NavLink to='/'>Home</NavLink></li>
-    <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-    <li><NavLink to='/'>Home</NavLink></li>
+    <li>
+      <NavLink to={
+        userData?.role === "Student"
+          ? "/dashboard/booked"
+          : userData?.role === "Tutor"
+            ? "/dashboard/createStudy"
+            : userData?.role === "admin"
+              ? "/dashboard/users"
+              : "/dashboard"
+      }>
+        Dashboard
+      </NavLink>
+    </li>
+
   </>
 
 
@@ -44,7 +63,7 @@ const Navbar = () => {
           {navOption}
         </ul>
       </div>
-      
+
       <div className="navbar-end">
         {user && user.email ? (
           <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-[2px] rounded-full mr-3">
