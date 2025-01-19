@@ -6,8 +6,8 @@ const Card = ({AllData}) => {
 
   const {
           _id,
-          sessionTitle,
-          sessionDescription,
+          title,
+          description,
           registrationStartDate,
           registrationEndDate,
           
@@ -26,10 +26,10 @@ const Card = ({AllData}) => {
     <div
             className="border rounded-lg p-4 shadow-md bg-white"
           >
-            <h3 className="text-lg font-bold text-gray-800">{sessionTitle}</h3>
-            <p className="text-gray-600 my-2">{sessionDescription}</p>
-            <p className="text-gray-600 my-2">Start Registration: {registrationStartDate}</p>
-            <p className="text-gray-600 my-2">End Registration: {registrationEndDate}</p>
+            <h3 className="text-lg font-bold text-gray-800">{title}</h3>
+            <p className="text-gray-600 my-2">{description}</p>
+            <p className="text-gray-600 my-2 font-semibold">Start Registration: {registrationStartDate}</p>
+            <p className="text-gray-600 my-2 font-semibold">End Registration: {registrationEndDate}</p>
             <div className="flex items-center justify-between">
               <button
                 className={`px-4 py-2 text-sm font-medium rounded-md ${
