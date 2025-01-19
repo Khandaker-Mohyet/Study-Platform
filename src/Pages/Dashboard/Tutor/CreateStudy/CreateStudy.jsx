@@ -18,6 +18,10 @@ const CreateStudy = () => {
   const [classStartDate, setClassStartDate] = useState(new Date());
   const [classEndDate, setClassEndDate] = useState(new Date());
 
+  const formatDate = (date) => {
+    return date.toISOString().split("T")[0]; // Format: YYYY-MM-DD
+  };
+
   const onSubmit = async (data) => {
     // Prepare the session data
     const sessionData = {
@@ -25,10 +29,10 @@ const CreateStudy = () => {
       tutorName: user?.displayName,
       tutorEmail: user?.email,
       description: data.description,
-      registrationStartDate,
-      registrationEndDate,
-      classStartDate,
-      classEndDate,
+      registrationStartDate: formatDate(registrationStartDate),
+      registrationEndDate: formatDate(registrationEndDate),
+      classStartDate: formatDate(classStartDate),
+      classEndDate: formatDate(classEndDate),
       duration: data.duration,
       fee: parseFloat(data.fee || 0), // Default 0
       status: "pending", // Default status
