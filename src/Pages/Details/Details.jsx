@@ -1,15 +1,21 @@
 import { useLoaderData } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
+import useRole from "../../Hooks/useRole";
+import useAuth from "../../Hooks/useAuth";
 
 const Details = () => {
   const AllData = useLoaderData();
-  const { user } = useAuth();
+  const [userData, userLoading] = useRole()
   const axiosSecure = UseAxiosSecure();
+  const {user} = useAuth()
 
-  console.log(AllData)
-  console.log(user)
+  
+
+
+   if (userLoading || !userData) {
+    return <p>Loading...</p>;
+  }
 
  
   const {
@@ -103,7 +109,7 @@ const Details = () => {
 
       {/* Book Now / Registration Closed */}
       <div className="mt-6 flex justify-between items-center">
-        {user?.role === "admin" || user?.role === "tutor" ? (
+        {userData?.role === "admin" || userData?.role === "Tutor" ? (
           <button
             className="px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed"
             disabled

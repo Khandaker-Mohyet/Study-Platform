@@ -18,7 +18,7 @@ const Booked = () => {
               </th>
               
               <th>Session Title</th>
-              <th>Price</th>
+              <th>Tutor Name</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -30,7 +30,7 @@ const Booked = () => {
                 </th>
                 
                 <td>
-                  {item.sessionTitle}
+                  {item.title}
                 </td>
                 <td>{item.tutorName}</td>
                 <th>

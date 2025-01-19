@@ -1,4 +1,4 @@
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaUser, FaUtensils } from "react-icons/fa";
+import { FaBook, FaEnvelope, FaHome, FaList, FaSearch, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useBooked from "../Hooks/useBooked";
 import useRole from "../Hooks/useRole";
@@ -15,8 +15,6 @@ const Dashboard = () => {
     return <p>Loading...</p>;
   }
   
-
-
 
   return (
     <div className="flex">

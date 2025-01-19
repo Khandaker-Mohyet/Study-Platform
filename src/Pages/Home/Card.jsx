@@ -41,7 +41,7 @@ const Card = ({AllData}) => {
               >
                 {isOngoing ? "Ongoing" : "Closed"}
               </button>
-              <Link to={`/details/${_id}`} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+              <Link to={`/details/single/${_id}`} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                 Read More
               </Link>
             </div>
