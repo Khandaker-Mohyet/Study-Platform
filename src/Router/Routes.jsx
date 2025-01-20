@@ -20,6 +20,7 @@ import CreateStudy from "../Pages/Dashboard/Tutor/CreateStudy/CreateStudy";
 import ViewAllStudy from "../Pages/Dashboard/Tutor/ViewAllStudy/ViewAllStudy";
 import UploadMaterials from "../Pages/Dashboard/Tutor/UploadMaterials/UploadMaterials";
 import ViewAllMaterials from "../Pages/Dashboard/Tutor/ViewAllMaterials/ViewAllMaterials";
+import BookedDetails from "../Pages/Dashboard/BookedDetails";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
     
       {
         path: 'booked',
-        element:<Booked></Booked>
+        element: <Booked></Booked>,
       },
       {
         path: 'note',
@@ -54,12 +55,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'personalNote',
-        element:<PersonalNote></PersonalNote>
+        element:<PersonalNote></PersonalNote>,
+        
       },
       {
         path: 'materials',
         element:<Materials></Materials>
       },
+      {
+        path: "details/:id",
+        element: <BookedDetails></BookedDetails>,
+        loader: ({params})=> fetch(`http://localhost:5000/studySection/single/${params.id}`)
+      },
+
 
       // Admin Section
       {
