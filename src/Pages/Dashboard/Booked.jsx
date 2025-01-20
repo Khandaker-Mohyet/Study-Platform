@@ -1,53 +1,47 @@
+import { Link, } from "react-router-dom";
 import useBooked from "../../Hooks/useBooked";
 
-
-
-
 const Booked = () => {
-  const [booked] = useBooked()
-  console.log(booked)
+  const [booked] = useBooked();
+
   return (
     <div>
       <div className="overflow-x-auto">
         <table className="table  w-full">
-          {/* head */}
           <thead>
             <tr>
-              <th>
-                #
-              </th>
-              
+              <th>#</th>
               <th>Session Title</th>
               <th>Tutor Name</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {
-              booked.map((item, index) => <tr key={item._id}>
-                <th>
-                  {index + 1}
-                </th>
-                
-                <td>
-                  {item.title}
-                </td>
+            {booked.map((item, index) => (
+              <tr key={item._id}>
+                <th>{index + 1}</th>
+                <td>{item.sessionTitle}</td>
                 <td>{item.tutorName}</td>
-                <th>
-                  <button
-                    
-                    className="btn btn-ghost btn-lg">
+                <td>{item.tutorName}</td>
+                <td>
+                  <Link to={`/dashboard/details/${item.bookId}`}>
+                    <button
+
+                    className="btn btn-ghost btn-lg"
+                  >
                     Details
                   </button>
-                </th>
-              </tr>)
-            }
-
-
+                  
+                  </Link>
+                    
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </div>
+  
   );
 };
 
