@@ -42,25 +42,26 @@ const StudySession = () => {
 
   const handleRejectSession = async (id) => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'This session will be rejected and removed from the list.',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "This session will be marked as rejected.",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, reject it!',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, reject it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axiosSecure.delete(`/studySection/reject/${id}`);
-          Swal.fire('Rejected!', 'The session has been rejected.', 'success');
-          refetch();
+          await axiosSecure.patch(`/studySection/reject/${id}`);
+          Swal.fire("Rejected!", "The session has been marked as rejected.", "success");
+          refetch(); // Refresh data to update UI
         } catch (error) {
-          Swal.fire('Error', 'Failed to reject the session.', 'error');
+          Swal.fire("Error", "Failed to reject the session.", "error");
         }
       }
     });
   };
+
 
   const handleDeleteSession = async (id) => {
     Swal.fire({

@@ -2,24 +2,25 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import UseAxiosSecure from "../../../../Hooks/UseAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
+import { useLocation } from "react-router-dom";
 
-const UploadMaterials = ({ studySessionId }) => {
+const UploadMaterials = () => {
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = UseAxiosSecure();
   const { user } = useAuth();
+  const location = useLocation();
+  const studySessionId = location.state?.sessionId;
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("studySessionId", studySessionId);
-    formData.append("tutorEmail", user.email);
-    formData.append("image", data.image[0]); // Single image upload
-    formData.append("link", data.link);
+    const payload = {
+      title: data.title,
+      studySessionId: studySessionId,
+      tutorEmail: user.email,
+      link: data.link,
+    };
 
     try {
-      const res = await axiosSecure.post("/materials", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await axiosSecure.post("/materials", payload);
       if (res.data.insertedId) {
         reset();
         Swal.fire({
@@ -75,16 +76,6 @@ const UploadMaterials = ({ studySessionId }) => {
             value={user.email}
             readOnly
             className="input input-bordered bg-gray-100"
-          />
-        </div>
-
-        {/* Image Upload */}
-        <div className="form-control">
-          <label>Image</label>
-          <input
-            type="file"
-            {...register("image", { required: true })}
-            className="file-input file-input-bordered"
           />
         </div>
 
