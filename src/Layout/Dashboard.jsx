@@ -62,12 +62,6 @@ const Dashboard = () => {
                     View All Study</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/uploadMaterials">
-                    <FaList></FaList>
-                    Upload Materials
-                  </NavLink>
-                </li>
-                <li>
                   <NavLink to="/dashboard/ViewAllMaterials">
                     <FaBook></FaBook>
                     View All Materials</NavLink>
