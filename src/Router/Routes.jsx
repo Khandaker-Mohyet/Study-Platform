@@ -21,6 +21,7 @@ import ViewAllStudy from "../Pages/Dashboard/Tutor/ViewAllStudy/ViewAllStudy";
 import UploadMaterials from "../Pages/Dashboard/Tutor/UploadMaterials/UploadMaterials";
 import ViewAllMaterials from "../Pages/Dashboard/Tutor/ViewAllMaterials/ViewAllMaterials";
 import BookedDetails from "../Pages/Dashboard/BookedDetails";
+import UpdateMaterial from "../Pages/Dashboard/Tutor/ViewAllMaterials/UpdateMaterial";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,11 @@ const router = createBrowserRouter([
       {
         path: 'ViewAllMaterials',
         element:<ViewAllMaterials></ViewAllMaterials>
+      },
+      {
+        path: 'updateMaterials/:id',
+        element: <UpdateMaterial></UpdateMaterial>,
+        loader: ({params})=> fetch(`http://localhost:5000/materials/single/${params.id}`)
       },
     ]
   },
