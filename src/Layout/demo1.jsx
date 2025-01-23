@@ -3,6 +3,10 @@ import Swal from "sweetalert2";
 import UseAxiosSecure from "../../../../Hooks/UseAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+
+// const Image_Hosting_Key = import.meta.env.VTE_IMAGE_HOSTING_KEY;
+// const Image_Hosting_Api = `https://api.imgbb.com/1/upload?key=${Image_Hosting_Key}`
 
 const UploadMaterials = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -12,38 +16,35 @@ const UploadMaterials = () => {
   const studySessionId = location.state?.sessionId;
 
   const onSubmit = async (data) => {
+  try {
+    // Image Upload
+    // const imageFile = new FormData();
+    // imageFile.append("image", data.image[0]);
+
+    // const imageRes = await axios.post(Image_Hosting_Api, imageFile, {
+    //   headers: { "Content-Type": "multipart/form-data" },
+    // });
+
     const payload = {
       title: data.title,
       studySessionId: studySessionId,
       tutorEmail: user.email,
-      photo: data.photo,
       link: data.link,
-      
+      // image: imageRes.data.data.display_url,
     };
 
-    try {
-      const res = await axiosSecure.post("/materials", payload);
-      if (res.data.insertedId) {
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Materials uploaded successfully!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Failed to upload materials.",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+    // Upload Material
+    const res = await axiosSecure.post("/materials", payload);
+    if (res.data.insertedId) {
+      reset();
+      Swal.fire("Success", "Materials uploaded successfully!", "success");
     }
-  };
+  } catch (error) {
+    console.error("Error:", error);
+    Swal.fire("Error", "Failed to upload materials.", "error");
+  }
+};
+
 
   return (
     <div>
@@ -80,16 +81,11 @@ const UploadMaterials = () => {
             className="input input-bordered bg-gray-100"
           />
         </div>
-
-        {/* Link */}
-        <div className="form-control">
-          <label>Photo Url Link</label>
-          <input
-            type="url"
-            {...register("photo", { required: true })}
-            className="input input-bordered"
-          />
-        </div>
+        {/* image */}
+        {/* <div className="form-control ">
+          <label>Upload Image</label>
+            <input {...register('image', { required: true })} type="file" className="file-input input input-bordered" />
+          </div> */}
 
         {/* Link */}
         <div className="form-control">

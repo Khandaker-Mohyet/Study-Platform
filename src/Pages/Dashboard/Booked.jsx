@@ -20,7 +20,7 @@ const Booked = () => {
             {booked.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}</th>
-                <td>{item.sessionTitle}</td>
+                <td>{item.title}</td>
                 <td>{item.tutorName}</td>
                 <td>{item.tutorName}</td>
                 <td>

@@ -24,7 +24,7 @@ const Note = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Review created successfully!",
+          title: "Note created successfully!",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -34,7 +34,7 @@ const Note = () => {
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "Failed to create Review.",
+        title: "Failed to create note.",
         showConfirmButton: false,
         timer: 1500,
       });
