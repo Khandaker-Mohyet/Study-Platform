@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useRole from "../Hooks/useRole";
+import logo from "../assets/e-logo.png"
 
 
 const Navbar = () => {
@@ -23,7 +24,7 @@ const Navbar = () => {
             ? "/dashboard/createStudy"
             : userData?.role === "admin"
               ? "/dashboard/users"
-              : "/dashboard"
+              : "/auth/login"
       }>
         Dashboard
       </NavLink>
@@ -56,7 +57,7 @@ const Navbar = () => {
             {navOption}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <img className="w-20 h-20" src={logo} alt="" />
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -76,7 +77,7 @@ const Navbar = () => {
           </div>
         ) : ""}
         {
-          user && user?.email ? <button onClick={singInOut} className="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-2 px-4 rounded shadow hover:shadow-lg transform hover:scale-105 transition-all">Log out</button> : <Link to="/auth/Login" className="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-2 px-4 rounded shadow hover:shadow-lg transform hover:scale-105 transition-all">Login</Link>
+          user && user?.email ? <button onClick={singInOut} className="bg-gradient-to-r from-[#008080] to-[#a569bd] text-white font-semibold py-2 px-4 rounded shadow hover:shadow-lg transform hover:scale-105 transition-all">Log out</button> : <Link to="/auth/Login" className="bg-gradient-to-r from-[#008080] to-[#a569bd] text-white font-semibold py-2 px-4 rounded shadow hover:shadow-lg transform hover:scale-105 transition-all">Login</Link>
         }
       </div>
     </div>

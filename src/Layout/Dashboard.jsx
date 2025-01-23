@@ -12,14 +12,14 @@ const Dashboard = () => {
 
 
    if (userLoading || !userData) {
-    return <p>Loading...</p>;
+    return <p className="w-1/12 mx-auto mt-24">Loading...</p>;
   }
   
 
   return (
     <div className="flex">
       {/* dashboard side bar */}
-      <div className="w-64 min-h-screen bg-orange-400">
+      <div className="w-64 min-h-screen text-white bg-[#148f77]">
         <ul className="menu p-4">
 
           <div>
@@ -99,16 +99,7 @@ const Dashboard = () => {
               <FaHome></FaHome>
               Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/order/salad">
-              <FaSearch></FaSearch>
-              Menu</NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/contact">
-              <FaEnvelope></FaEnvelope>
-              Contact</NavLink>
-          </li>
+          
         </ul>
       </div>
       {/* dashboard content */}

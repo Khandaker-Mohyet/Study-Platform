@@ -11,6 +11,7 @@ const UpdateMaterial = () => {
       title: updateMaterial.title,
       studySessionId: updateMaterial.studySessionId,
       tutorEmail: updateMaterial.tutorEmail,
+      photo: updateMaterial.photo,
       link: updateMaterial.link,
     },
   });
@@ -74,6 +75,16 @@ const UpdateMaterial = () => {
             {...register("tutorEmail", { required: true })}
             readOnly
             className="input input-bordered bg-gray-100"
+          />
+        </div>
+
+        {/* photo */}
+        <div className="form-control">
+          <label>Photo Link</label>
+          <input
+            type="url"
+            {...register("photo", { required: true })}
+            className="input input-bordered"
           />
         </div>
 

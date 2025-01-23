@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { Children, createContext, useEffect, useState } from "react";
 import auth from "../Firebas/Firebas.init";
+import axios, { toFormData } from "axios";
 const provider = new GoogleAuthProvider();
 
 
@@ -49,12 +50,26 @@ const AuthProvider = ({children}) => {
     setUser,
     loading,
     updateUserProfile,
-    googleSignIn
+    googleSignIn,
   }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
+      if (currentUser) {
+        // todo
+        const userInfo = { email: currentUser.email }
+        axios.post('http://localhost:5000/jwt', userInfo)
+          .then(res => {
+            if (res.data.token) {
+              localStorage.setItem('access-token', res.data.token);
+          }
+        })
+      }
+      else {
+        // Todo
+        localStorage.removeItem('access-token')
+      }
       setLoading(false)
     })
     return () => {

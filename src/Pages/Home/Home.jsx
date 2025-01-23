@@ -1,3 +1,4 @@
+import TutorSection from "../../Components/TutorSection";
 import Banner from "./Banner";
 import HomeCard from "./HomeCard";
 
@@ -7,6 +8,7 @@ const Home = () => {
     <div>
       <Banner></Banner>
       <HomeCard></HomeCard>
+      <TutorSection></TutorSection>
     </div>
   );
 };

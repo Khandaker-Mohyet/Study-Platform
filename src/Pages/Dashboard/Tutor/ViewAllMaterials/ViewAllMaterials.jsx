@@ -13,7 +13,7 @@ const ViewAllMaterials = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const res = await axiosSecure.get(`/materials?tutorEmail=${user.email}`);
+        const res = await axiosSecure.get(`/materials/${user.email}`);
         setMaterials(res.data);
       } catch (error) {
         console.error("Failed to fetch materials:", error);
@@ -62,7 +62,8 @@ const ViewAllMaterials = () => {
             <tr>
               <th className="border border-gray-300 p-2">Title</th>
               <th className="border border-gray-300 p-2">Study Session ID</th>
-              <th className="border border-gray-300 p-2">Link</th>
+              <th className="border border-gray-300 p-2">Photo Link</th>
+              <th className="border border-gray-300 p-2">Google Drive Link</th>
               <th className="border border-gray-300 p-2">Actions</th>
             </tr>
           </thead>
@@ -71,6 +72,11 @@ const ViewAllMaterials = () => {
               <tr key={material._id}>
                 <td className="border border-gray-300 p-2">{material.title}</td>
                 <td className="border border-gray-300 p-2">{material.studySessionId}</td>
+                <td className="border border-gray-300 p-2">
+                  <a href={material.photo} target="_blank" rel="noopener noreferrer" className="text-blue-500">
+                    View
+                  </a>
+                </td>
                 <td className="border border-gray-300 p-2">
                   <a href={material.link} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                     View

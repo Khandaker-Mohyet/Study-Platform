@@ -1,109 +1,101 @@
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaUser, FaUtensils } from "react-icons/fa";
-import { NavLink, Outlet } from "react-router-dom";
-import useBooked from "../Hooks/useBooked";
-import { useEffect, useState } from "react";
+// src/components/StudyMaterials.js
+import { useEffect, useState } from 'react';
+import useBooked from '../../../Hooks/useBooked';
+import axios from 'axios';
+
+const Materials = () => {
+
+  // const [booked] = useBooked();
+  // const [materials, setMaterials] = useState()
+  // const [bookeds, setBookeds] =useState()
+  // console.log(bookeds)
 
 
+  // useEffect(() => {
+  //   axios.get(`http://localhost:5000/materials/studySession/${bookeds.bookId}`)
+  //     .then(res => {
+  //     console.log(res.data)
+  //   })
+  //   booked.map(book => {
+  //     setBookeds(book)
+  //   })
+  // },[booked, bookeds])
 
-const Dashboard = () => {
+  const fakeBookedSessions = [
+    { id: 'session1', title: 'Math Basics', materials: [
+      { id: 'mat1', imageUrl: 'https://via.placeholder.com/150', driveLink: 'https://drive.google.com/example1' },
+      { id: 'mat2', imageUrl: 'https://via.placeholder.com/150', driveLink: 'https://drive.google.com/example2' }
+    ]},
+    { id: 'session2', title: 'Physics Fundamentals', materials: [
+      { id: 'mat3', imageUrl: 'https://via.placeholder.com/150', driveLink: 'https://drive.google.com/example3' },
+      { id: 'mat4', imageUrl: 'https://via.placeholder.com/150', driveLink: 'https://drive.google.com/example4' }
+    ]}
+  ];
 
-  const [booked] = useBooked()
-  const [role, setRole] = useState()
+  const [selectedSession, setSelectedSession] = useState(null);
 
-  useEffect(() => {
-      fetch('http://localhost:5000/users')
-        .then(res => res.json())
-        .then(result => setRole(result))
-      
-    },[])
-
-
-  const isAdmin = true;
+  const handleSessionClick = (sessionId) => {
+    setSelectedSession(sessionId);
+  };
 
   return (
-    <div className="flex">
-      {/* dashboard side bar */}
-      <div className="w-64 min-h-screen bg-orange-400">
-        <ul className="menu p-4">
-
-          {
-            isAdmin ?
-              <>
-                <li>
-                  <NavLink to="/dashboard/users">
-                    <FaBook></FaBook>
-                    Users</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/studySession">
-                    <FaUtensils></FaUtensils>
-                    Study Session </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/adminMaterials">
-                <FaList></FaList>
-                Materials
-                    </NavLink>
-                </li>
-                
-              </>
-              :
-              <>
-                <li>
-                  <NavLink to="/dashboard/booked">
-                    <FaBook></FaBook>
-                    My booked session ({booked.length})</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/note">
-                    <FaUtensils></FaUtensils>
-                    Create note</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/personalNote">
-                <FaList></FaList>
-                Manage personal notes
-                    </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/materials">
-                    <FaBook></FaBook>
-                    study materials</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/users">
-                    <FaUser></FaUser>
-                    All Users</NavLink>
-                </li>
-              </>
-          }
-
-
-          {/* shared Nav links */}
-          <div className="divider"></div>
-          <li>
-            <NavLink to="/">
-              <FaHome></FaHome>
-              Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/salad">
-              <FaSearch></FaSearch>
-              Menu</NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/contact">
-              <FaEnvelope></FaEnvelope>
-              Contact</NavLink>
-          </li>
-        </ul>
-      </div>
-      {/* dashboard content */}
-      <div className="flex-1 p-8">
-        <Outlet></Outlet>
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-2xl font-bold text-center mb-6">Your Study Materials</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {selectedSession === null ? (
+          fakeBookedSessions.map(session => (
+            <div
+              key={session.id}
+              className="p-4 bg-white shadow-md rounded-md cursor-pointer hover:bg-blue-100"
+              onClick={() => handleSessionClick(session.id)}
+            >
+              <h2 className="text-lg font-semibold">{session.title}</h2>
+            </div>
+          ))
+        ) : (
+          <div>
+            <button
+              className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              onClick={() => setSelectedSession(null)}
+            >
+              Back to Sessions
+            </button>
+            {fakeBookedSessions
+              .find(session => session.id === selectedSession)
+              .materials.map(material => (
+                <div
+                  key={material.id}
+                  className="p-4 bg-white shadow-md rounded-md mb-4"
+                >
+                  <img
+                    src={material.imageUrl}
+                    alt="Material Preview"
+                    className="w-full h-auto rounded-md mb-2"
+                  />
+                  <a
+                    href={material.driveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline block mb-2"
+                  >
+                    View on Google Drive
+                  </a>
+                  <a
+                    href={material.imageUrl}
+                    download
+                    className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                  >
+                    Download Image
+                  </a>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default Materials;
+
+

@@ -10,7 +10,7 @@ const StudySession = () => {
     queryKey: ['studySessions'],
     queryFn: async ({ signal }) => {
       const res = await axiosSecure.get('/studySection', { signal });
-      return res.data;
+      return res.data.data;
     },
   });
 

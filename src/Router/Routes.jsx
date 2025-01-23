@@ -22,6 +22,7 @@ import UploadMaterials from "../Pages/Dashboard/Tutor/UploadMaterials/UploadMate
 import ViewAllMaterials from "../Pages/Dashboard/Tutor/ViewAllMaterials/ViewAllMaterials";
 import BookedDetails from "../Pages/Dashboard/BookedDetails";
 import UpdateMaterial from "../Pages/Dashboard/Tutor/ViewAllMaterials/UpdateMaterial";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -73,15 +74,15 @@ const router = createBrowserRouter([
       // Admin Section
       {
         path: 'users',
-        element:<Users></Users>
+        element:<AdminRoute><Users></Users></AdminRoute>
       },
       {
         path: 'studySession',
-        element:<StudySession></StudySession>
+        element:<AdminRoute><StudySession></StudySession></AdminRoute>
       },
       {
         path: 'adminMaterials',
-        element:<AdminMaterials></AdminMaterials>
+        element:<AdminRoute><AdminMaterials></AdminMaterials></AdminRoute>
       },
 
       // Toutor Section
