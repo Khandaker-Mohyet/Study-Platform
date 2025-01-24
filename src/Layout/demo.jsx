@@ -12,7 +12,7 @@ const Materials = () => {
 
 
   // useEffect(() => {
-  //   axios.get(`http://localhost:5000/materials/studySession/${bookeds.bookId}`)
+  //   axios.get(`https://assignment-12-server-henna-nu.vercel.app/materials/studySession/${bookeds.bookId}`)
   //     .then(res => {
   //     console.log(res.data)
   //   })

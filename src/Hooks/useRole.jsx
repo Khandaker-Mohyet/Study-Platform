@@ -10,7 +10,7 @@ const useRole = () => {
     queryKey: ["userData", user?.email], 
     queryFn: async () => {
       if (!user?.email) return null; 
-      const res = await axios.get(`http://localhost:5000/users/${user.email}`); 
+      const res = await axios.get(`https://assignment-12-server-henna-nu.vercel.app/users/${user.email}`); 
       return res.data; 
     },
     enabled: !!user?.email, 
