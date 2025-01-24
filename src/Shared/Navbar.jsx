@@ -10,14 +10,12 @@ const Navbar = () => {
   const [userData, userLoading] = useRole()
 
 
-  // if (userLoading || !userData) {
-  //   return <p>Loading...</p>;
-  // }
+  
 
   const navOption = <>
-    <li><NavLink to='/'>Home</NavLink></li>
-    <li>
-      <NavLink to={
+    <NavLink className={({ isActive }) => `text-lg font-bold mr-3 ${isActive ? 'text-[#008080]' : 'hover:text-purple-600'}`} to='/'>Home</NavLink>
+    
+      <NavLink className={({ isActive }) => ` text-lg font-bold ${isActive ? 'text-purple-600' : 'hover:text-purple-600'}`} to={
         userData?.role === "Student"
           ? "/dashboard/booked"
           : userData?.role === "Tutor"
@@ -28,7 +26,7 @@ const Navbar = () => {
       }>
         Dashboard
       </NavLink>
-    </li>
+    
 
   </>
 

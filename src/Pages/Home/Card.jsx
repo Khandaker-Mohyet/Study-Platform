@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { FaRegCalendarAlt, FaInfoCircle } from "react-icons/fa";
+import { GrStatusUnknown } from "react-icons/gr";
 
 const Card = ({ AllData }) => {
   const {
@@ -22,21 +24,42 @@ const Card = ({ AllData }) => {
   const isApproved = status === "approved";
 
   return (
-    <div className="border rounded-lg p-4 shadow-md bg-white">
-      <h3 className="text-lg font-bold text-gray-800">{title}</h3>
-      <p className="text-gray-600 my-2">{description}</p>
-      <p className="text-gray-600 my-2 font-semibold">
-        Start Registration: {registrationStartDate}
-      </p>
-      <p className="text-gray-600 my-2 font-semibold">
-        End Registration: {registrationEndDate}
-      </p>
-      <p className="text-gray-600 my-2 font-semibold">Status: {status}</p>
-      <div className="flex items-center justify-between">
+    <div className="border rounded-lg p-6 shadow-md bg-white flex flex-col justify-between h-full">
+      {/* Title */}
+      <div className="text-center">
+        <h3 className="text-2xl font-bold text-gray-800">{title}</h3>
+      </div>
+
+      {/* Description */}
+      <div className="mt-4">
+        <p className="text-gray-600">{description}</p>
+      </div>
+
+      {/* Details */}
+      <div className="mt-4">
+        <p className="text-gray-600 flex items-center gap-2">
+          <FaRegCalendarAlt className="text-gray-500" />
+          <span>Start Registration: {registrationStartDate}</span>
+        </p>
+        <p className="text-gray-600 flex items-center gap-2">
+          <FaRegCalendarAlt className="text-gray-500" />
+          <span>End Registration: {registrationEndDate}</span>
+        </p>
+        <p className="text-gray-600 flex items-center gap-2">
+          <GrStatusUnknown className="text-gray-500" />
+          <span>Status: {status}</span>
+        </p>
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-gray-300 my-4"></div>
+
+      {/* Footer Buttons */}
+      <div className="flex justify-between items-center">
         <button
           className={`px-4 py-2 text-sm font-medium rounded-md ${
             isOngoing
-              ? "bg-green-500 text-white"
+              ? "bg-green-500 text-white hover:bg-green-600"
               : "bg-red-500 text-white cursor-not-allowed"
           }`}
           disabled={!isOngoing}
@@ -45,13 +68,12 @@ const Card = ({ AllData }) => {
         </button>
         <Link
           to={`/details/single/${_id}`}
-          className={`px-4 py-2 rounded-md ${
-            isApproved
-              ? "bg-blue-500 text-white hover:bg-blue-600"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          className={`px-4 py-2 text-sm font-medium text-white rounded-md ${
+            isApproved ? "bg-[#008080] hover:bg-teal-600" : "bg-gray-300"
           }`}
           style={{ pointerEvents: isApproved ? "auto" : "none" }}
         >
+          <FaInfoCircle className="inline mr-2" />
           Read More
         </Link>
       </div>

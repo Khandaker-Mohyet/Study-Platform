@@ -10,7 +10,7 @@ const HomeCard = () => {
 
   const fetchData = async (page) => {
     try {
-      const res = await fetch(`http://localhost:5000/studySection?page=${page}&limit=${itemsPerPage}`);
+      const res = await fetch(`https://assignment-12-server-henna-nu.vercel.app/studySection?page=${page}&limit=${itemsPerPage}`);
       const result = await res.json();
       setData(result.data);
       setTotalPages(result.totalPages);
@@ -31,6 +31,7 @@ const HomeCard = () => {
 
   return (
     <div className="p-4">
+      <h1 className="text-3xl font-semibold text-center my-10">All Study Section</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
          {data.map((AllData) => (
       <Card key={AllData._id} AllData={AllData}></Card>

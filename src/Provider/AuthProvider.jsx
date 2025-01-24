@@ -20,7 +20,6 @@ const AuthProvider = ({children}) => {
     return createUserWithEmailAndPassword(auth, email, password)
   }
 
-
   const logInUser = (email, password) => {
     setLoading(true)
     return signInWithEmailAndPassword(auth, email, password)
@@ -40,8 +39,6 @@ const AuthProvider = ({children}) => {
   }
 
 
-
-  
   const studyInfo = {
     createUser,
     logInUser,
@@ -59,7 +56,7 @@ const AuthProvider = ({children}) => {
       if (currentUser) {
         // todo
         const userInfo = { email: currentUser.email }
-        axios.post('http://localhost:5000/jwt', userInfo)
+        axios.post('https://assignment-12-server-henna-nu.vercel.app/jwt', userInfo)
           .then(res => {
             if (res.data.token) {
               localStorage.setItem('access-token', res.data.token);
