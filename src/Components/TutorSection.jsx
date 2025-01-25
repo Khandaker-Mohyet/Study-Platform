@@ -2,18 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../Hooks/UseAxiosSecure";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import axios from "axios";
 
 
 const TutorSection = () => {
 
-  const axiosSecure = UseAxiosSecure();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { data: tutors = [] } = useQuery({
     queryKey: ['tutors'], // Updated queryKey for better clarity
     queryFn: async () => {
-      const res = await axiosSecure.get('/users');
-      return res.data.filter((user) => user.role === 'Tutor'); 
+      const res = await axios.get('https://assignment-12-server-henna-nu.vercel.app/users/tutors');
+      return res.data; 
     },
   });
 
