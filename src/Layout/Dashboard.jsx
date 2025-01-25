@@ -1,7 +1,9 @@
-import { FaBook, FaEnvelope, FaHome, FaList, FaSearch, FaUtensils } from "react-icons/fa";
+import { FaBook, FaEnvelope, FaHome, FaList, FaRegUserCircle, FaSearch, FaStickyNote, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useBooked from "../Hooks/useBooked";
 import useRole from "../Hooks/useRole";
+import { MdCastForEducation } from "react-icons/md";
+import { GiExplosiveMaterials } from "react-icons/gi";
 
 
 
@@ -33,7 +35,7 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <NavLink to="/dashboard/note">
-                    <FaUtensils></FaUtensils>
+                    <FaStickyNote />
                     Create note</NavLink>
                 </li>
                 <li>
@@ -44,7 +46,7 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <NavLink to="/dashboard/materials">
-                    <FaBook></FaBook>
+                    <GiExplosiveMaterials />
                     study materials</NavLink>
                 </li>
               </>
@@ -72,12 +74,12 @@ const Dashboard = () => {
               <>
                 <li>
                   <NavLink to="/dashboard/users">
-                    <FaBook></FaBook>
+                    <FaRegUserCircle />
                     Users</NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/studySession">
-                    <FaUtensils></FaUtensils>
+                    <MdCastForEducation />
                     Study Session </NavLink>
                 </li>
                 <li>
