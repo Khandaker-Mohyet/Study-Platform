@@ -1,20 +1,22 @@
 import Card from "./Card";
-import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const HomeCard = () => {
-  const axiosSecure = UseAxiosSecure();
+  
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
   const { data: studySessions = [] } = useQuery({
     queryKey: ["studySessions"],
     queryFn: async ({ signal }) => {
-      const res = await axiosSecure.get("/studySection", { signal });
+      const res = await axios.get("https://assignment-12-server-henna-nu.vercel.app/studySection", { signal });
       return res.data;
     },
   });
+
+  console.log(studySessions)
 
   const totalPages = Math.ceil(studySessions.length / itemsPerPage);
 
