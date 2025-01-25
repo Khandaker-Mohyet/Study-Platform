@@ -1,29 +1,27 @@
-import { useState, useEffect } from "react";
 import Card from "./Card";
-
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const HomeCard = () => {
-  const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1); 
-  const [totalPages, setTotalPages] = useState(0); 
-  const itemsPerPage = 6; 
+  const axiosSecure = UseAxiosSecure();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-  const fetchData = async (page) => {
-    try {
-      const res = await fetch(`https://assignment-12-server-henna-nu.vercel.app/studySection?page=${page}&limit=${itemsPerPage}`);
-      const result = await res.json();
-      setData(result.data);
-      setTotalPages(result.totalPages);
-    } catch (error) {
-      console.error("Failed to fetch data:", error);
-    }
-  };
+  const { data: studySessions = [] } = useQuery({
+    queryKey: ["studySessions"],
+    queryFn: async ({ signal }) => {
+      const res = await axiosSecure.get("/studySection", { signal });
+      return res.data;
+    },
+  });
 
-  console.log(data)
+  const totalPages = Math.ceil(studySessions.length / itemsPerPage);
 
-  useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
+  const currentData = studySessions.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -33,9 +31,9 @@ const HomeCard = () => {
     <div className="p-4">
       <h1 className="text-3xl font-semibold text-center my-10">All Study Section</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-         {data.map((AllData) => (
-      <Card key={AllData._id} AllData={AllData}></Card>
-    ))}
+        {currentData.map((AllData) => (
+          <Card key={AllData._id} AllData={AllData}></Card>
+        ))}
       </div>
 
       {/* Pagination Buttons */}

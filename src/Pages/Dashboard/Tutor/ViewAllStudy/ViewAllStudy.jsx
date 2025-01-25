@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import UseAxiosSecure from "../../../../Hooks/UseAxiosSecure";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const ViewAllStudy = () => {
   const axiosSecure = UseAxiosSecure();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
 
   const { data: allStudy = [], isLoading } = useQuery({
     queryKey: ["allStudy", user?.email],
@@ -17,6 +18,16 @@ const ViewAllStudy = () => {
       return res.data;
     },
     enabled: !!user?.email,
+  });
+
+  const requestApproveMutation = useMutation({
+    mutationFn: async (id) => {
+      const res = await axiosSecure.patch(`/studySection/requestApprove/${id}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["allStudy", user?.email]);
+    },
   });
 
   if (isLoading) {
@@ -46,18 +57,18 @@ const ViewAllStudy = () => {
               <strong>Duration:</strong> {session.duration} months
             </p>
             <p className="text-gray-600">
-              <strong>Fee:</strong>{" "}
-              {session.fee === 0 ? "Free" : `$${session.fee}`}
+              <strong>Fee:</strong> {session.fee === 0 ? "Free" : `$${session.fee}`}
             </p>
             <p className="text-gray-600">
               <strong>Status:</strong>{" "}
               <span
-                className={`px-2 py-1 rounded ${session.status === "approved"
+                className={`px-2 py-1 rounded ${
+                  session.status === "approved"
                     ? "bg-green-200 text-green-800"
                     : session.status === "pending"
-                      ? "bg-yellow-200 text-yellow-800"
-                      : "bg-red-200 text-red-800"
-                  }`}
+                    ? "bg-yellow-200 text-yellow-800"
+                    : "bg-red-200 text-red-800"
+                }`}
               >
                 {session.status}
               </span>
@@ -72,6 +83,14 @@ const ViewAllStudy = () => {
                   Upload Material
                 </Link>
               </div>
+            )}
+            {session.status === "rejected" && (
+              <button
+                onClick={() => requestApproveMutation.mutate(session._id)}
+                className="btn btn-secondary btn-sm mt-2"
+              >
+                Approve Request
+              </button>
             )}
           </div>
         ))}
@@ -102,7 +121,7 @@ const ViewAllStudy = () => {
         </TabPanel>
 
         <TabPanel>
-          {renderSessions(rejectedSessions)} {/* No Upload Material button */}
+          {renderSessions(rejectedSessions)} {/* Show Approve Request button */}
         </TabPanel>
       </Tabs>
     </div>
