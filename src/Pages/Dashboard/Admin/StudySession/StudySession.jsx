@@ -10,9 +10,11 @@ const StudySession = () => {
     queryKey: ['studySessions'],
     queryFn: async ({ signal }) => {
       const res = await axiosSecure.get('/studySection', { signal });
-      return res.data.data;
+      return res.data;
     },
   });
+
+  console.log(studySessions)
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState(null);

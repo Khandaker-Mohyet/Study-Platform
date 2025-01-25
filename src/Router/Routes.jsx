@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       {
         path: "/details/single/:id",
         element: <PrivateRoute><Details></Details></PrivateRoute>,
-        loader: ({params})=> fetch(`https://assignment-12-server-henna-nu.vercel.app/studySection/single/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/studySection/single/${params.id}`)
       },
     ]
   },
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
       {
         path: "details/:id",
         element: <BookedDetails></BookedDetails>,
-        loader: ({params})=> fetch(`https://assignment-12-server-henna-nu.vercel.app/studySection/single/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/studySection/single/${params.id}`)
       },
 
 
@@ -106,7 +106,7 @@ const router = createBrowserRouter([
       {
         path: 'updateMaterials/:id',
         element: <UpdateMaterial></UpdateMaterial>,
-        loader: ({params})=> fetch(`https://assignment-12-server-henna-nu.vercel.app/materials/single/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/materials/single/${params.id}`)
       },
     ]
   },
