@@ -9,7 +9,7 @@ const useBooked = () => {
     queryKey: ['booked', user?.email],
     queryFn: async () => {
       if (!user?.email) return [];
-      const res = await axios.get(`https://assignment-12-server-henna-nu.vercel.app/book/${user.email}`);
+      const res = await axios.get(`http://localhost:5000/book/${user.email}`);
       return res.data;
     }
   });

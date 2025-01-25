@@ -53,7 +53,7 @@ const Details = () => {
       return;
     }
 
-    if (!bankAccount) {
+    if (!bankAccount && fee > 0) {
       Swal.fire({
         icon: "error",
         title: "Input Required",
@@ -67,7 +67,7 @@ const Details = () => {
       email: user.email,
       title,
       tutorName,
-      bankAccount,
+      bankAccount: fee > 0 ? bankAccount : "N/A",
     };
 
     axiosSecure.post("/book", bookItem).then((res) => {
@@ -82,6 +82,14 @@ const Details = () => {
         setIsModalOpen(false); // Close modal after successful booking
       }
     });
+  };
+
+  const handleBookNow = () => {
+    if (fee === 0) {
+      handleAddCard();
+    } else {
+      setIsModalOpen(true); // Open the modal if payment is required
+    }
   };
 
   return (
@@ -124,7 +132,7 @@ const Details = () => {
           </button>
         ) : isRegistrationOpen ? (
           <button
-            onClick={() => setIsModalOpen(true)} // Open the modal
+            onClick={handleBookNow} // Handle book logic
             className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
           >
             Book Now

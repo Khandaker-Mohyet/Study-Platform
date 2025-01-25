@@ -12,7 +12,7 @@ const TutorSection = () => {
   const { data: tutors = [] } = useQuery({
     queryKey: ['tutors'], // Updated queryKey for better clarity
     queryFn: async () => {
-      const res = await axios.get('https://assignment-12-server-henna-nu.vercel.app/users/tutors');
+      const res = await axios.get('http://localhost:5000/users/tutors');
       return res.data; 
     },
   });

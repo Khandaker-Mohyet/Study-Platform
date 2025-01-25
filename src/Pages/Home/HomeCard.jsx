@@ -11,7 +11,7 @@ const HomeCard = () => {
   const { data: studySessions = [] } = useQuery({
     queryKey: ["studySessions"],
     queryFn: async ({ signal }) => {
-      const res = await axios.get("https://assignment-12-server-henna-nu.vercel.app/studySection", { signal });
+      const res = await axios.get("http://localhost:5000/studySection", { signal });
       return res.data;
     },
   });
