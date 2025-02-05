@@ -1,10 +1,22 @@
-Name of your website: Study Platform
-Admin username: Abdullah Al Mohyet
-Password: 123456
-live site URL: https://study-platform-ba93a.web.app
 
 
-# Website Features  
+## Project Overview
+Collaborative Study Platform is a web-based application designed to connect students, tutors, and administrators for seamless study session scheduling, resource sharing, and effective educational management.
+
+# Name of your website: Study Platform
+# Admin username: Abdullah Al Mohyet
+# Password: 123456
+# live site URL: https://study-platform-ba93a.web.app
+
+## Technologies Used
+- Frontend: React.js, TailwindCSS
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- Authentication: Firebase Authentication, JWT
+- Other: RESTful APIs, WebSockets for real-time updates, Cloud 
+- Storage for resource sharing
+
+
 
 ## Key Features  
 
@@ -39,9 +51,37 @@ live site URL: https://study-platform-ba93a.web.app
 10. **Scalable Design**  
    - Built with React and TailwindCSS, ensuring scalability and maintainability for future enhancements.  
 
-## Technology Stack  
-- **Frontend**: React, TailwindCSS  
-- **Backend**: Node.js, Express.js  
-- **Database**: MongoDB  
-- **State Management**: React Query  
-- **Alerts**: SweetAlert2  
+## Dependencies Used
+- react-router-dom (for navigation)
+- axios (for API requests)
+- jsonwebtoken (for authentication)
+- dotenv (for environment variables)
+- firebase (for authentication and storage)
+- sweetalert2 (for interactive alerts)
+- react-hot-toast (for notifications)
+
+## Installation
+To run this project locally:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Khandaker-Mohyet/Study-Platform.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Study-Platform
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+
+
+## Live Project & Resources
+- Live Project: https://study-platform-ba93a.web.app
+- GitHub Repository: (https://github.com/Khandaker-Mohyet/Study-Platform)
+- API Documentation: (https://assignment-12-server-henna-nu.vercel.app/)
+
