@@ -3,10 +3,10 @@
 ## Project Overview
 Collaborative Study Platform is a web-based application designed to connect students, tutors, and administrators for seamless study session scheduling, resource sharing, and effective educational management.
 
-# Name of your website: Study Platform
-# Admin username: Abdullah Al Mohyet
-# Password: 123456
-# live site URL: https://study-platform-ba93a.web.app
+## Name of your website: Study Platform
+## Admin username: Abdullah Al Mohyet
+## Password: 123456
+## live site URL: https://study-platform-ba93a.web.app
 
 ## Technologies Used
 - Frontend: React.js, TailwindCSS
