@@ -8,7 +8,7 @@ const Banner = () => {
           Collaborative Study Platform
         </h1>
         <h1 className='text-white lg: w-6/12 md:8/12 mx-auto'>
-          This project focuses on creating a Collaborative Study Platform that connects students, tutors, and administrators to streamline study session scheduling, resource sharing, and user management.
+          This project focuses on creating a Collaborative Study Platform that connects students, tutors, and administrators to streamline study session scheduling, resource sharing, and user management. This is 
         </h1>
         
       </div>
