@@ -87,7 +87,7 @@ const Register = () => {
               <input type="email" name="email" placeholder="email" className="input input-bordered" required />
             </div>
             <div className="form-control">
-            <select defaultValue="Currency" name="role" className="select select-ghost w-full max-w-xs">
+            <select name="role" className="select select-ghost w-full max-w-xs">
               <option disabled>Role</option>
               <option>Student</option>
               <option>Tutor</option>
